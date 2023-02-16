@@ -4,6 +4,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity(name = "Car")
@@ -18,13 +22,18 @@ public class Car {
     private Long id;
 
     @Column(name = "brand", nullable = false)
+    @Size(min = 2, message = "The brand length has to have minim 2 characters")
+    @NotNull(message = "The brand is missing")
     private String brand;
 
     @Column(name = "model", nullable = false)
+    @Size(min = 2, message = "Model's length must have minim 2 characters !")
+    @NotNull(message = "The model is missing")
     private String model;
 
     @Column(name = "weight", nullable = false)
-    private Double weight;
+    @DecimalMin(value = "0.1" , message = "Weight value is missing !")
+    private double weight;
 
     @Column(name = "isAvailable")
     private Boolean isAvailable;
