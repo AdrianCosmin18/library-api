@@ -6,6 +6,7 @@ import com.example.crudjs.exceptions.CarNotFoundByIdException;
 import com.example.crudjs.exceptions.CarsListEmptyException;
 import com.example.crudjs.model.Car;
 import com.example.crudjs.repo.CarRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ThemeResolver;
 
@@ -15,11 +16,8 @@ import java.util.Optional;
 @Service
 public class CarService {
 
+    @Autowired
     private CarRepo carRepo;
-
-    public CarService(CarRepo carRepo) {
-        this.carRepo = carRepo;
-    }
 
     public List<Car> getCars(){
         List<Car> cars = carRepo.findAll();
@@ -30,9 +28,8 @@ public class CarService {
     }
 
     public Car getCarById(Long id){
-        Car car = carRepo.findById(id)
+        return carRepo.findById(id)
                 .orElseThrow(() -> new CarNotFoundByIdException(id));
-        return car;
     }
 
     public void deleteCarById(Long id){
