@@ -30,7 +30,6 @@ public class CarController {
 
     @GetMapping("/{id}")
     public Car getCarById(@PathVariable Long id){
-
         return carService.getCarById(id);
     }
 
@@ -49,4 +48,8 @@ public class CarController {
         this.carService.updateCar(carDTO, id);
     }
 
+    @PutMapping("/update-car-by-brand-model")
+    public void updateCarByBrandAndModel(@RequestParam(value = "brand")String brand, @RequestParam(value = "model")String model, @RequestBody CarDTO carDTO){
+        this.carService.updateCarByBrandAndModel(carDTO, brand, model);
+    }
 }

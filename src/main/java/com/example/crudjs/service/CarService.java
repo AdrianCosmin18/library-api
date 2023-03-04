@@ -2,6 +2,7 @@ package com.example.crudjs.service;
 
 import com.example.crudjs.DTO.CarDTO;
 import com.example.crudjs.exceptions.AlreadyExistsCarWithSameBrandAndModelException;
+import com.example.crudjs.exceptions.CarNotFoundByBrandAndModel;
 import com.example.crudjs.exceptions.CarNotFoundByIdException;
 import com.example.crudjs.exceptions.CarsListEmptyException;
 import com.example.crudjs.model.Car;
@@ -51,5 +52,11 @@ public class CarService {
         Car car = carRepo.findById(id)
                 .orElseThrow(() -> new CarNotFoundByIdException(id));
         carRepo.updateCarById(id, carDTO.getBrand(), carDTO.getModel(), carDTO.getWeight(), carDTO.getIsAvailable());
+    }
+
+    public void updateCarByBrandAndModel(CarDTO carDTO, String oldBrand, String oldModel){
+        Car car = carRepo.getCarByBrandAndModel(oldBrand, oldModel)
+                .orElseThrow(CarNotFoundByBrandAndModel::new);
+        carRepo.updateCarByBrandAndModel(oldBrand, oldModel, car.getBrand(), car.getModel(), carDTO.getWeight(), carDTO.getIsAvailable());
     }
 }
