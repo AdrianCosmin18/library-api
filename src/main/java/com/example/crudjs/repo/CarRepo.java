@@ -1,9 +1,11 @@
 package com.example.crudjs.repo;
 
+import com.example.crudjs.DTO.CarDTO;
 import com.example.crudjs.model.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +24,7 @@ public interface CarRepo extends JpaRepository<Car, Long> {
 
     @Modifying
     @Transactional
-    @Query("update Car c set  c.brand = ?3, c.model = ?4, c.weight = ?5, c.isAvailable = ?6 where c.brand = ?1 and c.model = ?2")
-    void updateCarByBrandAndModel(String oldBrand, String oldModel, String brand, String model, Double weight, Boolean isAvailable);
+    @Query("update Car c set c.brand = :#{#car.brand}, c.model = :#{#car.model}, c.weight = :#{#car.weight}, c.isAvailable = :#{#car.isAvailable} where c.brand = :oldBrand and c.model = :oldModel")
+    void updateCarByBrandAndModel(String oldBrand, String oldModel, @Param("car") CarDTO car);
+
 }

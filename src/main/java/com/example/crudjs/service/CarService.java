@@ -57,6 +57,6 @@ public class CarService {
     public void updateCarByBrandAndModel(CarDTO carDTO, String oldBrand, String oldModel){
         Car car = carRepo.getCarByBrandAndModel(oldBrand, oldModel)
                 .orElseThrow(CarNotFoundByBrandAndModel::new);
-        carRepo.updateCarByBrandAndModel(oldBrand, oldModel, car.getBrand(), car.getModel(), carDTO.getWeight(), carDTO.getIsAvailable());
+        carRepo.updateCarByBrandAndModel(oldBrand, oldModel, carDTO);
     }
 }
