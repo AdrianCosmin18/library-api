@@ -59,4 +59,9 @@ public class CarService {
                 .orElseThrow(CarNotFoundByBrandAndModel::new);
         carRepo.updateCarByBrandAndModel(oldBrand, oldModel, carDTO);
     }
+
+    public Car getCarByBrandAndModel(String brand, String model){
+        return this.carRepo.getCarByBrandAndModel(brand, model)
+                .orElseThrow(() -> new CarNotFoundByBrandAndModel());
+    }
 }

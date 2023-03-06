@@ -52,4 +52,9 @@ public class CarController {
     public void updateCarByBrandAndModel(@RequestParam(value = "brand")String brand, @RequestParam(value = "model")String model, @RequestBody CarDTO carDTO){
         this.carService.updateCarByBrandAndModel(carDTO, brand, model);
     }
+
+    @GetMapping("/get-car-by-brand-model")
+    public Car getCarByBrandAndModel(@RequestParam(value = "brand")String brand, @RequestParam(value = "model")String model){
+        return this.carService.getCarByBrandAndModel(brand, model);
+    }
 }
