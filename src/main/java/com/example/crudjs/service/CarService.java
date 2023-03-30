@@ -64,4 +64,14 @@ public class CarService {
         return this.carRepo.getCarByBrandAndModel(brand, model)
                 .orElseThrow(() -> new CarNotFoundByBrandAndModel());
     }
+
+    public void deleteCar(String brand, String model){
+        if(this.carRepo.getCarByBrandAndModel(brand, model).isPresent()){
+            this.carRepo.deleteCarByBrandAndModel(brand, model);
+
+        }else{
+            throw new CarNotFoundByBrandAndModel();
+
+        }
+    }
 }

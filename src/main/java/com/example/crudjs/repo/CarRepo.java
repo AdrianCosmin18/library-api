@@ -27,4 +27,7 @@ public interface CarRepo extends JpaRepository<Car, Long> {
     @Query("update Car c set c.brand = :#{#car.brand}, c.model = :#{#car.model}, c.weight = :#{#car.weight}, c.isAvailable = :#{#car.isAvailable} where c.brand = :oldBrand and c.model = :oldModel")
     void updateCarByBrandAndModel(String oldBrand, String oldModel, @Param("car") CarDTO car);
 
+    @Transactional
+    void deleteCarByBrandAndModel(String brand, String model);
+
 }

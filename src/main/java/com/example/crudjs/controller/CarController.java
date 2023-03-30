@@ -57,4 +57,9 @@ public class CarController {
     public Car getCarByBrandAndModel(@RequestParam(value = "brand")String brand, @RequestParam(value = "model")String model){
         return this.carService.getCarByBrandAndModel(brand, model);
     }
+
+    @DeleteMapping("/delete-car/{brand}/{model}")
+    public void deleteCar(@PathVariable String brand, @PathVariable String model){
+        this.carService.deleteCar(brand, model);
+    }
 }
