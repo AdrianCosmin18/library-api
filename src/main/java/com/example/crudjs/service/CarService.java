@@ -39,13 +39,14 @@ public class CarService {
         carRepo.deleteById(id);
     }
 
-    public void addCar(Car newCar){
+    public Car addCar(Car newCar){
 
         Optional<Car> car = carRepo.getCarByBrandAndModel(newCar.getBrand(), newCar.getModel());
         if(car.isPresent()){
             throw new AlreadyExistsCarWithSameBrandAndModelException(newCar.getBrand(), newCar.getModel());
         }
-        carRepo.saveAndFlush(new Car(newCar.getBrand(), newCar.getModel(), newCar.getWeight(), newCar.getIsAvailable()));
+        Car car1 = carRepo.saveAndFlush(new Car(newCar.getBrand(), newCar.getModel(), newCar.getWeight(), newCar.getIsAvailable()));
+        return car1;
     }
 
     public void updateCar(CarDTO carDTO, Long id){

@@ -34,8 +34,8 @@ public class CarController {
     }
 
     @PostMapping()
-    public void addCar(@Valid @RequestBody Car car){
-        this.carService.addCar(car);
+    public Car addCar(@Valid @RequestBody Car car){
+        return this.carService.addCar(car);
     }
 
     @DeleteMapping("/{id}")
